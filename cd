@@ -1,0 +1,461 @@
+ex 1 :    SYMBOL TABLE 
+n = int(input("Enter number of lines: "))
+table = []
+
+for _ in range(n):
+    str_line = input().strip().split(" ")
+
+    for k in str_line:
+        snip = []
+        if k in ["int", "char", "float", "double"]:
+            v = str_line.index(k)
+            u = str_line[v + 1]
+            variables = u.split(";")[0].split(",")
+
+            for var in variables:
+                if '=' in var:
+                    var_name = var.split("=")[0]
+                    if not any(var_name in item for item in table):
+                        snip.extend([var_name, id(var_name), k])
+                else:
+                    if not any(var in item for item in table):
+                        snip.extend([var, id(var), k])
+
+        if snip:
+            table.append(snip)
+
+# Output the symbol table
+print("\nSymbol  Address  Type")
+for row in table:
+    for i, item in enumerate(row):
+        if i % 3 == 0 and i != 0:
+            print()  # New line after every 3 items
+        print(item, end="   ")
+
+print()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ Ex No :02     NUMERIC INPUT CLASSIFIER
+%{
+    	#include<stdio.h>
+%}
+%option noyywrap
+%%
+[+-]?[0-9]+ {printf("integer : %s",yytext);}
+[+-]?[0-9]+.[0-9]+ {printf("float : %s",yytext);}
+[0-9]+.[0-9]+"E"[+-]?[0-9]+ {printf("exponent : %s",yytext);}
+.[0-9]+ {printf("optional fraction : %s",yytext);}
+%%
+
+void main(){
+printf("enter number :\n");
+yylex();
+}
+
+
+IDENTIFIER VALIDATION USING LEXICAL ANALYZER
+
+%{
+#include<stdio.h>
+#include<string.h>
+char *key[]={"int", "float", "void", "char", "in", "and", "or", "not", "in", "for", "while", "do", "if", "else", "break", "continue", NULL};
+int check(char *iden){
+        int i=0;
+        while(key[i] != NULL){
+                if(strcmp(key[i],iden)==0){return 1;}
+                i++;
+        }
+        return 0;
+}
+%}
+%option noyywrap
+%%
+[a-zA-Z_][a-zA-Z0-9_]*          { if(check(yytext)){printf("invalid identifier\n");} else{printf("valid identifier\n");} }
+[^\n]+  {printf("invalid identifier\n");}
+\n      {}
+%%
+
+void main(){
+    printf("enter identifier:-\n");
+    yylex();
+}
+
+
+
+VOWEL AND CONSONANT IDENTIFICATION
+%{
+#include <stdio.h>
+%}
+%option noyywrap
+%%
+[aeiouAEIOU]	{ printf("%s is vowel", yytext); }
+. {printf("%s is consonant",yytext);}
+%%
+void main() {
+	printf("Enter a alphabets :-\n ");
+	yylex();
+}
+
+
+
+TEXT ANALYSIS WITH LEX
+%{
+#include<stdio.h>
+int lc=1,ch=0  ,wc=1,x=0;
+%}
+%option noyywrap
+%%
+[\n] { lc++;x=1;}
+. { if(strcmp(" ",yytext)==0){wc++;} else if(x==1){wc++;x=0;} ch++; }
+%%
+void main(){
+        printf("Enter the Sentence : -\n");
+        yylex();
+        if(ch == 0){ch = 0;wc=0;lc=0;}
+        printf("\nNumber of lines : %d\n",lc);
+        printf("Number of  words :  %d\n",wc);
+        printf("Number of character : %d\n",ch);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No : 3                      LEXICAL ANALYZER FOR C CODE                 
+%{
+    #include<stdio.h>
+%}
+
+%option noyywrap
+
+%%
+
+"#include<"[a-z]+".h>" { printf("\nHEADER: %s", yytext); }
+"int"|"float"|"void"|"char"|"long"|"double" { printf("\nKEYWORD: %s", yytext); }
+"for"|"while"|"if"|"printf"|"scanf" { printf("\nKEYWORD: %s", yytext); }
+"do"|"else"|"continue"|"break" { printf("\nKEYWORD: %s", yytext); }
+\"([^\"]*)\" { printf("\nSTRING: %s", yytext); }
+[a-zA-Z_][a-zA-Z0-9_]* { printf("\nIDENTIFIER: %s", yytext); }
+[a-zA-Z_][a-zA-Z0-9_]*"(" { printf("\nFUNCTION: %s", yytext); }
+"+"|"-"|"*"|"/"|"%"|"&&"|"||"|"="|"==" { printf("\nOPERATOR: %s", yytext); }
+[+-]?[0-9]+ { printf("\nCONSTANT: %s", yytext); }
+[+-]?[0-9]+.[0-9]+ { printf("\nCONSTANT: %s", yytext); }
+
+%%
+
+void main() {
+    printf("Enter code:\n");
+    yylex();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :04(a)           LEX & YACC -   IMPLEMENTATION OF CALCULATOR 
+Calculator lex yacc 
+%{
+        #include "yacc.tab.h"
+%}
+%%
+[0-9]+ {yylval=atoi(yytext); return NUMBER;}
+[\t\n]+ {}
+. {return yytext[0];}
+%%
+
+int yywrap(){
+return 1;
+}
+
+
+Yacc cal
+%{
+        #include<stdio.h>
+        int flag=0;
+%}
+%token NUMBER
+%left '+''-'
+%left '*''/''%'
+%left '('')'
+
+%%
+ArithmeticExpression:E{ printf("\nResult = %d\n",$$); return 0;}
+E:E'+'E{$$=$1+$3;}|E'-'E{$$=$1-$3;}|E'*'E{$$=$1*$3;}|E'/'E{$$=$1/$3;}|E'%'E{$$=$1%$3;}|'('E')'{$$=$2;}|NUMBER{$$=$1;}
+;
+%%
+
+void main(){
+        printf("\nenter any expression : ");
+        yyparse();
+}
+int yyerror(const char *s){ }
+
+
+
+
+
+
+Calculator lex yacc 
+%{
+        #include "yacc.tab.h"
+%}
+%%
+[0-9]+ {yylval=atoi(yytext); return NUMBER;}
+[\t\n]+ {}
+. {return yytext[0];}
+%%
+
+int yywrap(){
+return 1;
+}
+
+
+Yacc cal
+%{
+        #include<stdio.h>
+        int flag=0;
+%}
+%token NUMBER
+%left '+''-'
+%left '*''/''%'
+%left '('')'
+
+%%
+ArithmeticExpression:E{ printf("\nResult = %d\n",$$); return 0;}
+E:E'+'E{$$=$1+$3;}|E'-'E{$$=$1-$3;}|E'*'E{$$=$1*$3;}|E'/'E{$$=$1/$3;}|E'%'E{$$=$1%$3;}|'('E')'{$$=$2;}|NUMBER{$$=$1;}
+;
+%%
+
+void main(){
+        printf("\nenter any expression : ");
+        yyparse();
+}
+int yyerror(const char *s){  printf("\ninvalid"); flag=1; }
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :  5                        THREE ADDRESS CODE GENERATOR          
+
+print("Enter an arithmetic expression (with or without assignment):")
+expression = input().strip()
+
+tac = []  # Stores the three-address code
+temp_counter = 1  # Counter for temporary variables
+
+# Function to generate unique temporary variable names
+def get_temp():
+    global temp_counter
+    temp_var = f"t{temp_counter}"
+    temp_counter += 1
+    return temp_var
+
+# Recursive function to parse the expression and generate TAC
+def parse_expression(expr):
+    # Handle parentheses by recursively solving the inner expression
+    while "(" in expr:
+        open_paren = expr.rfind("(")
+        close_paren = expr.find(")", open_paren)
+        inner_expr = expr[open_paren + 1:close_paren]
+        temp_var = parse_expression(inner_expr)
+        expr = expr[:open_paren] + temp_var + expr[close_paren + 1:]
+
+    # Handle operators in precedence order
+    for op in ["+", "-", "*", "/"]:
+        if op in expr:
+            left, right = map(str.strip, expr.split(op, 1))
+            temp_left = parse_expression(left) if any(c in left for c in "+-*/") else left
+            temp_right = parse_expression(right) if any(c in right for c in "+-*/") else right
+            temp_var = get_temp()
+            tac.append(f"{temp_var} = {temp_left} {op} {temp_right}")
+            return temp_var
+
+    return expr.strip()
+
+# Check if the expression has an assignment
+if "=" in expression:
+    target, expr = map(str.strip, expression.split("=", 1))
+    result_var = parse_expression(expr)
+    tac.append(f"{target} = {result_var}")
+else:
+    parse_expression(expression)
+
+# Print the generated Three-Address Code
+print("\nThree-Address Code:")
+for line in tac:
+    print(line)
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :06                                    TYPE CHECKING
+
+print("Enter your three-address code (one line at a time).")
+code = []
+
+# Input lines of three-address code
+while True:
+    line = input().strip()
+    if line == "":
+        break
+    code.append(line)
+
+# Function to check data type compatibility
+def check_data_type(var, expr, type_dict):
+    operators = "+-*/"
+    # Check for direct assignments without operators
+    if all(op not in expr for op in operators):
+        if type_dict[var] == "float" and not expr.replace('.', '', 1).isdigit():
+            return False
+        if type_dict[var] == "int" and not expr.isdigit():
+            return False
+        if type_dict[var] == "char" and len(expr) != 1:
+            return False
+        return True
+
+    # For expressions with operators, ensure types of all variables match
+    operands = [item.strip() for item in expr.replace("+", "#").replace("-", "#").replace("*", "#").replace("/", "#").split("#")]
+    return all(type_dict.get(operand, type_dict[var]) == type_dict[var] for operand in operands)
+
+# Dictionary to store variable types
+type_dict = {}
+
+for line in code:
+    line = line.split(";")[0].strip()  # Remove trailing semicolons
+    if any(dtype in line for dtype in ["int", "float", "char", "double"]):
+        dtype, rest = line.split(maxsplit=1)
+        if "=" in rest:
+            var, expr = map(str.strip, rest.split("=", 1))
+            type_dict[var] = dtype
+            if not check_data_type(var, expr, type_dict):
+                print("Error: Mismatched data types")
+                exit(1)
+        else:
+            var = rest.strip()
+            type_dict[var] = dtype
+    elif "=" in line:
+        var, expr = map(str.strip, line.split("=", 1))
+        if not check_data_type(var, expr, type_dict):
+            print("Error: Mismatched data types")
+            exit(1)
+
+print("NO ERROR FOUND")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :08            convert three-address code to 8086 assembly language 
+print("Enter your three-address code (one line at a time).\nWhen you're done, enter an empty line:")
+tac_lines = []
+while (line := input().strip()) != "":
+    tac_lines.append(line)
+
+assembly_code = []
+register_map = {}
+current_register = 1
+
+def get_next_register():
+    global current_register
+    reg = f"R{current_register}"
+    current_register += 1
+    return reg
+
+for line in tac_lines:
+    target, expression = map(str.strip, line.split("="))
+    
+    if "+" in expression:
+        op1, op2 = map(str.strip, expression.split("+"))
+        reg1 = register_map.get(op1, get_next_register())
+        if op1 not in register_map:
+            assembly_code.append(f"LD {reg1} {op1}")
+            register_map[op1] = reg1
+        
+        reg2 = register_map.get(op2, get_next_register())
+        if op2 not in register_map:
+            assembly_code.append(f"LD {reg2} {op2}")
+            register_map[op2] = reg2
+        
+        reg_result = get_next_register()
+        assembly_code.append(f"ADD {reg_result} {reg1} {reg2}")
+        assembly_code.append(f"ST {target} {reg_result}")
+        register_map[target] = reg_result
+    else:
+        reg = get_next_register()
+        assembly_code.append(f"LD {reg} {expression}")
+        assembly_code.append(f"ST {target} {reg}")
+        register_map[target] = reg
+
+print("\nGenerated Assembly Code:")
+print("\n".join(assembly_code))
+
+
+
+
