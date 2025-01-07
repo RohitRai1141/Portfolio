@@ -1308,6 +1308,11 @@ or
 
 
 
+execute:
+npm install -g expo-cli
+expo init bmi-calculator
+cd bmi-calculator
+expo start
 
 
 Ex No :8         			    BMI CALCULATOR 
