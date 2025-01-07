@@ -1,0 +1,2091 @@
+Ex No :1        	CHANGE BACKGROUND COLOR, FONT STYLE, AND SIZE IN ANDROID
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <!-- Button to Change Style -->
+
+    <!-- TextView for Sample Text -->
+    <Button
+        android:id="@+id/buttonChangeStyle"
+        android:layout_width="145dp"
+        android:layout_height="58dp"
+        android:text="Change Style"
+        app:layout_constraintBottom_toTopOf="@+id/textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="126dp"
+        android:layout_height="40dp"
+        android:text="Sample Text"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/buttonChangeStyle"
+        app:layout_constraintVertical_bias="0.3" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+MainActivity.java
+package com.example.change_button;
+
+import android.os.Bundle;
+import androidx.appcompat.app.AppCompatActivity;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    TextView textView;
+    Button buttonChangeStyle;
+    int clickCount = 0;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        textView = findViewById(R.id.textView);
+        buttonChangeStyle = findViewById(R.id.buttonChangeStyle);
+
+        buttonChangeStyle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clickCount++;
+
+                switch (clickCount) {
+                    case 1:
+                        // First click: Change layout background color
+                        findViewById(R.id.main).setBackgroundColor(Color.YELLOW);
+                        break;
+                    case 2:
+                        // Second click: Change font style
+                        textView.setTypeface(Typeface.SERIF, Typeface.BOLD_ITALIC);
+                        break;
+                    case 3:
+                        // Third click: Change the font size
+                        textView.setTextSize(18);
+                        break;
+                    default:
+                        // Reset after 3 clicks
+                        clickCount = 0;
+                        break;
+                }
+            }
+        });
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :2        		ANDROID CALCULATOR APPLICATION
+xml
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewResult"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="36sp"
+        android:gravity="end"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        android:padding="16dp"
+        android:background="#EFEFEF"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnClr"/>
+
+    <Button
+        android:id="@+id/btnClr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CLR"
+        app:layout_constraintTop_toBottomOf="@+id/textViewResult"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.1"/>
+
+    <Button
+        android:id="@+id/btnBackspace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⌫"
+        app:layout_constraintTop_toBottomOf="@+id/textViewResult"
+        app:layout_constraintStart_toEndOf="@id/btnClr"
+        app:layout_constraintEnd_toStartOf="@id/btnDivide"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btnDivide"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="/"
+        app:layout_constraintTop_toBottomOf="@+id/textViewResult"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"/>
+
+    <Button
+        android:id="@+id/btn7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="7"
+        app:layout_constraintTop_toBottomOf="@id/btnClr"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btn8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="8"
+        app:layout_constraintTop_toBottomOf="@id/btnClr"
+        app:layout_constraintStart_toEndOf="@id/btn7"
+        app:layout_constraintEnd_toStartOf="@id/btn9"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btn9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="9"
+        app:layout_constraintTop_toBottomOf="@id/btnClr"
+        app:layout_constraintEnd_toStartOf="@id/btnMultiply"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btnMultiply"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*"
+        app:layout_constraintTop_toBottomOf="@id/btnClr"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btn4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4"
+        app:layout_constraintTop_toBottomOf="@id/btn7"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btn5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="5"
+        app:layout_constraintTop_toBottomOf="@id/btn7"
+        app:layout_constraintStart_toEndOf="@id/btn4"
+        app:layout_constraintEnd_toStartOf="@id/btn6"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btn6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="6"
+        app:layout_constraintTop_toBottomOf="@id/btn7"
+        app:layout_constraintEnd_toStartOf="@id/btnSubtract"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btnSubtract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="-"
+        app:layout_constraintTop_toBottomOf="@id/btn7"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btn1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="1"
+        app:layout_constraintTop_toBottomOf="@id/btn4"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <Button
+        android:id="@+id/btn2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="2"
+        app:layout_constraintTop_toBottomOf="@id/btn4"
+        app:layout_constraintStart_toEndOf="@id/btn1"
+        app:layout_constraintEnd_toStartOf="@id/btn3"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btn3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3"
+        app:layout_constraintTop_toBottomOf="@id/btn4"
+        app:layout_constraintEnd_toStartOf="@id/btnAdd"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="+"
+        app:layout_constraintTop_toBottomOf="@id/btn4"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <Button
+        android:id="@+id/btn0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="0"
+        app:layout_constraintTop_toBottomOf="@id/btn1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/btnDecimal"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btnDecimal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="."
+        app:layout_constraintTop_toBottomOf="@id/btn1"
+        app:layout_constraintEnd_toStartOf="@id/btnEqual"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <Button
+        android:id="@+id/btnEqual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="="
+        app:layout_constraintTop_toBottomOf="@id/btn1"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+java code
+package com.example.calculator;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+
+public class MainActivity extends AppCompatActivity {
+
+    private TextView textViewResult;
+    private String currentInput = "";
+    private String operator = "";
+    private double firstOperand = 0;
+    private boolean hasDecimal = false;  // Variable to track decimal point usage
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        textViewResult = findViewById(R.id.textViewResult);
+
+        // Set onClickListener for each button
+        setButtonListeners();
+    }
+
+    private void setButtonListeners() {
+        int[] buttonIds = {R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4,
+                R.id.btn5, R.id.btn6, R.id.btn7, R.id.btn8, R.id.btn9,
+                R.id.btnAdd, R.id.btnSubtract, R.id.btnMultiply, R.id.btnDivide,
+                R.id.btnEqual, R.id.btnClr, R.id.btnBackspace, R.id.btnDecimal};
+
+        for (int id : buttonIds) {
+            findViewById(id).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onButtonClick((Button) v);
+                }
+            });
+        }
+    }
+
+    private void onButtonClick(Button button) {
+        String buttonText = button.getText().toString();
+
+        switch (buttonText) {
+            case "CLR":
+                clearInput();
+                break;
+            case "⌫":
+                backspaceInput();
+                break;
+            case ".":
+                appendDecimal();
+                break;
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                setOperator(buttonText);
+                break;
+            case "=":
+                calculateResult();
+                break;
+            default: // Numbers
+                appendInput(buttonText);
+                break;
+        }
+    }
+    private void appendInput(String value) {
+        currentInput += value;
+        textViewResult.setText(currentInput);
+    }
+
+    private void clearInput() {
+        currentInput = "";
+        operator = "";
+        firstOperand = 0;
+        hasDecimal = false;  // Reset decimal flag
+        textViewResult.setText("0");
+    }
+
+    private void backspaceInput() {
+        if (!currentInput.isEmpty()) {
+            if (currentInput.endsWith(".")) {
+                hasDecimal = false;  // If backspacing decimal, reset flag
+            }
+            currentInput = currentInput.substring(0, currentInput.length() - 1);
+            textViewResult.setText(currentInput.isEmpty() ? "0" : currentInput);
+        }
+    }
+
+    private void appendDecimal() {
+        if (!hasDecimal) {
+            if (currentInput.isEmpty()) {
+                currentInput = "0";  // Prepend "0" if starting with decimal
+            }
+            currentInput += ".";
+            textViewResult.setText(currentInput);
+            hasDecimal = true;  // Set flag to prevent multiple decimals
+        }
+    }
+
+    private void setOperator(String op) {
+        if (!currentInput.isEmpty()) {
+            firstOperand = Double.parseDouble(currentInput);
+            currentInput = "";
+            operator = op;
+            hasDecimal = false;  // Reset decimal flag when operator is pressed
+            textViewResult.setText(operator);
+        }
+    }
+
+    private void calculateResult() {
+        if (!currentInput.isEmpty() && !operator.isEmpty()) {
+            double secondOperand = Double.parseDouble(currentInput);
+            double result = 0;
+
+            switch (operator) {
+                case "+":
+                    result = firstOperand + secondOperand;
+                    break;
+                case "-":
+                    result = firstOperand - secondOperand;
+                    break;
+                case "*":
+                    result = firstOperand * secondOperand;
+                    break;
+                case "/":
+                    result = firstOperand / secondOperand;
+                    break;
+            }
+            textViewResult.setText(String.valueOf(result));
+            currentInput = String.valueOf(result);
+            operator = "";
+            hasDecimal = currentInput.contains(".");  // Check if result contains decimal
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :3       		ANDROID APPLICATION TO SEND MAIL
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:orientation="vertical"
+   android:padding="16dp">
+   <EditText
+       android:id="@+id/emailAddress"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Friend's Email Address"
+       android:inputType="textEmailAddress" />
+   <EditText
+       android:id="@+id/emailSubject"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Email Subject"
+       android:inputType="text" />
+   <EditText
+       android:id="@+id/emailMessage"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:hint="Message"
+       android:inputType="textMultiLine"
+       android:lines="5" />
+   <Button
+       android:id="@+id/sendEmailButton"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Send Email"
+       android:layout_marginTop="16dp" />
+</LinearLayout>
+
+Main.java
+package com.example.sendmailapp;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+   private EditText emailAddress, emailSubject, emailMessage;
+   private Button sendEmailButton;
+   @Override
+   protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       setContentView(R.layout.activity_main);
+       emailAddress = findViewById(R.id.emailAddress);
+       emailSubject = findViewById(R.id.emailSubject);
+       emailMessage = findViewById(R.id.emailMessage);
+       sendEmailButton = findViewById(R.id.sendEmailButton);
+       sendEmailButton.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               sendEmail();
+           }
+       });
+   }
+
+   private void sendEmail() {
+       String recipient = emailAddress.getText().toString();
+       String subject = emailSubject.getText().toString();
+       String message = emailMessage.getText().toString();
+       if (recipient.isEmpty() || subject.isEmpty() || message.isEmpty()) {
+           Toast.makeText(this, "Please fill out all fields.", Toast.LENGTH_SHORT).show();
+           return;
+       }
+       Intent emailIntent = new Intent(Intent.ACTION_SENDTO);
+       emailIntent.setData(Uri.parse("mailto:" + recipient));
+       emailIntent.putExtra(Intent.EXTRA_SUBJECT, subject);
+       emailIntent.putExtra(Intent.EXTRA_TEXT, message);
+       try {    startActivity(Intent.createChooser(emailIntent, "Choose an Email client :"));}
+       catch (android.content.ActivityNotFoundException ex) {
+           Toast.makeText(this, "No email clients installed.", Toast.LENGTH_SHORT).show();
+       }
+   }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :05      			   LIBRARY APPLICATION
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="16dp"
+    tools:context=".MainActivity">
+
+    <!-- Title -->
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Library Management System"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="20dp" />
+
+    <!-- Input for Book Name -->
+    <EditText
+        android:id="@+id/editTextTextPersonName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book Name"
+        android:inputType="textPersonName" />
+
+    <!-- Input for Author Name -->
+    <EditText
+        android:id="@+id/editTextTextPersonName2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Author"
+        android:inputType="textPersonName" />
+
+    <!-- Save Button -->
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="save"
+        android:text="Save" />
+
+    <!-- Input for Book Name to View -->
+    <EditText
+        android:id="@+id/editTextTextPersonName3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book Name to View"
+        android:inputType="textPersonName" />
+
+    <!-- View Button -->
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="retrieve"
+        android:text="View" />
+
+    <!-- Output Text for Displaying Author -->
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:paddingTop="8dp" />
+
+    <!-- Input for Book Name to Update -->
+    <EditText
+        android:id="@+id/editTextTextPersonName4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book Name to Update"
+        android:inputType="textPersonName" />
+
+    <!-- Input for New Author -->
+    <EditText
+        android:id="@+id/editTextTextPersonName5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="New Author"
+        android:inputType="textPersonName" />
+
+    <!-- Update Button -->
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:onClick="update"
+        android:text="Update" />
+
+    <!-- Input for Book Name to Delete -->
+    <EditText
+        android:id="@+id/editTextTextPersonName6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Book Name to Delete/Borrow/Return"
+        android:inputType="textPersonName" />
+
+    <!-- Buttons for Delete, Borrow, and Return -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:weightSum="3">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="delete"
+            android:text="Delete"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/button7"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="borrow"
+            android:text="Borrow"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/button8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="returnbook"
+            android:text="Return"
+            android:layout_marginStart="8dp" />
+    </LinearLayout>
+</LinearLayout>
+
+MainActivity.java
+package com.example.library_management;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    private EditText bookNameEditText, authorEditText, viewBookEditText, updateBookNameEditText, updateAuthorEditText, deleteBookEditText;
+    private TextView resultTextView;
+    private DB dbHelper;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        bookNameEditText = findViewById(R.id.editTextTextPersonName);
+        authorEditText = findViewById(R.id.editTextTextPersonName2);
+        viewBookEditText = findViewById(R.id.editTextTextPersonName3);
+        updateBookNameEditText = findViewById(R.id.editTextTextPersonName4);
+        updateAuthorEditText = findViewById(R.id.editTextTextPersonName5);
+        deleteBookEditText = findViewById(R.id.editTextTextPersonName6);
+        resultTextView = findViewById(R.id.textView);
+        dbHelper = new DB(this);
+    }
+
+    public void save(View view) {
+        String bookName = bookNameEditText.getText().toString().trim();
+        String author = authorEditText.getText().toString().trim();
+        if (!bookName.isEmpty() && !author.isEmpty()) {
+            dbHelper.save(bookName, author);
+            Toast.makeText(this, "Book saved successfully!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Please enter book name and author.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void retrieve(View view) {
+        String bookName = viewBookEditText.getText().toString().trim();
+        if (!bookName.isEmpty()) {
+            String author = dbHelper.retrieve(bookName);
+            resultTextView.setText(author);
+        } else {
+            Toast.makeText(this, "Please enter book name to view.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void update(View view) {
+        String bookName = updateBookNameEditText.getText().toString().trim();
+        String newAuthor = updateAuthorEditText.getText().toString().trim();
+        if (!bookName.isEmpty() && !newAuthor.isEmpty()) {
+            dbHelper.update(bookName, newAuthor);
+            Toast.makeText(this, "Book updated successfully!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Please enter book name and new author to update.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void delete(View view) {
+        String bookName = deleteBookEditText.getText().toString().trim();
+        if (!bookName.isEmpty()) {
+            dbHelper.delete(bookName);
+            Toast.makeText(this, "Book deleted successfully!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Please enter book name to delete.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void borrow(View view) {
+        String bookName = deleteBookEditText.getText().toString().trim();
+        if (!bookName.isEmpty()) {
+            if (dbHelper.isAvailable(bookName)) {
+                dbHelper.borrow(bookName);
+                Toast.makeText(this, "You borrowed: " + bookName, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Book is already borrowed or not found.", Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            Toast.makeText(this, "Please enter book name to borrow.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void returnbook(View view) {
+        String bookName = deleteBookEditText.getText().toString().trim();
+        if (!bookName.isEmpty()) {
+            dbHelper.returnBook(bookName);
+            Toast.makeText(this, "You returned: " + bookName, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "Please enter book name to return.", Toast.LENGTH_SHORT).show();
+        }
+    }
+}
+
+DB.java
+package com.example.library_management;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class DB extends SQLiteOpenHelper {
+
+    private static final String DATABASE_NAME = "LibraryDB";
+    private static final int DATABASE_VERSION = 1;
+    private static final String TABLE_NAME = "Books";
+    private static final String COLUMN_BOOK_NAME = "book_name";
+    private static final String COLUMN_AUTHOR = "author";
+    private static final String COLUMN_STATUS = "status";
+
+    public DB(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        String createTable = "CREATE TABLE " + TABLE_NAME + " (" +
+                COLUMN_BOOK_NAME + " TEXT PRIMARY KEY, " +
+                COLUMN_AUTHOR + " TEXT, " +
+                COLUMN_STATUS + " TEXT DEFAULT 'available')";
+        db.execSQL(createTable);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        onCreate(db);
+    }
+
+    public void save(String bookName, String author) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_BOOK_NAME, bookName);
+        values.put(COLUMN_AUTHOR, author);
+        db.insert(TABLE_NAME, null, values);
+        db.close();
+    }
+
+    public String retrieve(String bookName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMN_AUTHOR},
+                COLUMN_BOOK_NAME + "=?", new String[]{bookName}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            String author = cursor.getString(0);
+            cursor.close();
+            return author;
+        }
+        return "Book not found.";
+    }
+
+    public void update(String bookName, String newAuthor) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_AUTHOR, newAuthor);
+        db.update(TABLE_NAME, values, COLUMN_BOOK_NAME + "=?", new String[]{bookName});
+        db.close();
+    }
+
+    public void delete(String bookName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(TABLE_NAME, COLUMN_BOOK_NAME + "=?", new String[]{bookName});
+        db.close();
+    }
+
+    public void borrow(String bookName) {
+        if (isAvailable(bookName)) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put(COLUMN_STATUS, "borrowed");
+            db.update(TABLE_NAME, values, COLUMN_BOOK_NAME + "=?", new String[]{bookName});
+            db.close();
+        }
+    }
+
+    public void returnBook(String bookName) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_STATUS, "available");
+        db.update(TABLE_NAME, values, COLUMN_BOOK_NAME + "=?", new String[]{bookName});
+        db.close();
+    }
+    public boolean isAvailable(String bookName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(TABLE_NAME, new String[]{COLUMN_STATUS},
+                COLUMN_BOOK_NAME + "=?", new String[]{bookName}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            String status = cursor.getString(0);
+            cursor.close();
+            return "available".equals(status);
+        }
+        return false;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :6    		LOGIN PAGE	USING APACHE CORDOVA
+run cordova
+cordova -v
+cordova create myApp com.example.myapp MyApp
+cd myApp
+cordova platform add browser
+cordova build browser
+cordova run browser
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login Screen</title>
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        .login-container {
+            width: 300px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+            text-align: center;
+        }
+        .login-container img {
+            width: 100px;
+            margin-bottom: 15px;
+        }
+        .login-container h2 {
+            margin: 0 0 20px;
+            color: #333;
+        }
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .login-container button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .submit-button {
+            background-color: #5cb85c;
+        }
+        .reset-button {
+            background-color: #d9534f;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <img src="img/logo.png" alt="Header Image" >
+        <h2>Login</h2>
+        <input type="text" id="username" placeholder="Username" >
+        <input type="password" id="password" placeholder="Password" >
+        <button class="submit-button" onclick="submitLogin()">Submit</button>
+        <button class="reset-button" onclick="resetFields()">Reset</button>
+    </div>
+
+    <script>
+        function submitLogin() {
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            if(username && password) {
+                alert("Login successful!");
+            } else {
+                alert("Please enter username and password.");
+            }
+        }
+
+        function resetFields() {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :7    		LOCATION FINDER APP USING CORDOVA
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Current Location</title>
+    <style>
+        /* Basic styling */
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+        }
+        .location-container {
+            text-align: center;
+            padding: 20px;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+            background-color: #ffffff;
+        }
+        .location-container h2 {
+            color: #333;
+        }
+        .location-container button {
+            padding: 10px;
+            margin-top: 20px;
+            width: 100%;
+            font-size: 16px;
+            color: #fff;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .location-container p {
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="location-container">
+        <h2>Your Current Location</h2>
+        <p id="latitude">Latitude: --</p>
+        <p id="longitude">Longitude: --</p>
+        <button onclick="getLocation()">Find Location</button>
+    </div>
+
+    <script>
+        // Function to retrieve and display the current location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, showError, { enableHighAccuracy: true });
+            } else {
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+
+        // Show position if retrieval is successful
+        function showPosition(position) {
+            document.getElementById('latitude').innerText = "Latitude: " + position.coords.latitude;
+            document.getElementById('longitude').innerText = "Longitude: " + position.coords.longitude;
+        }
+
+        // Show error message if retrieval fails
+        function showError(error) {
+            switch(error.code) {
+                case error.PERMISSION_DENIED:
+                    alert("User denied the request for Geolocation.");
+                    break;
+                case error.POSITION_UNAVAILABLE:
+                    alert("Location information is unavailable.");
+                    break;
+                case error.TIMEOUT:
+                    alert("The request to get user location timed out.");
+                    break;
+                case error.UNKNOWN_ERROR:
+                    alert("An unknown error occurred.");
+                    break;
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :8         			    BMI CALCULATOR 
+import React, { useState } from "react";
+import { StyleSheet, Text, TextInput, View, Button, Alert } from "react-native";
+
+export default function App() {
+  const [weight, setWeight] = useState("");
+  const [height, setHeight] = useState("");
+  const [bmi, setBmi] = useState(null);
+  const [status, setStatus] = useState("");
+
+  const calculateBMI = () => {
+    if (!weight || !height) {
+      Alert.alert("Error", "Please enter valid weight and height!");
+      return;
+    }
+
+    const weightNum = parseFloat(weight);
+    const heightNum = parseFloat(height) / 100; // Convert cm to meters
+    const bmiValue = weightNum / (heightNum * heightNum);
+
+    setBmi(bmiValue.toFixed(2));
+
+    if (bmiValue < 18.5) {
+      setStatus("Underweight");
+    } else if (bmiValue >= 18.5 && bmiValue < 24.9) {
+      setStatus("Normal weight");
+    } else if (bmiValue >= 25 && bmiValue < 29.9) {
+      setStatus("Overweight");
+    } else {
+      setStatus("Obese");
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>BMI Calculator</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter weight (kg)"
+        keyboardType="numeric"
+        value={weight}
+        onChangeText={setWeight}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Enter height (cm)"
+        keyboardType="numeric"
+        value={height}
+        onChangeText={setHeight}
+      />
+      <Button title="Calculate BMI" onPress={calculateBMI} />
+      {bmi && (
+        <View style={styles.resultContainer}>
+          <Text style={styles.result}>BMI: {bmi}</Text>
+          <Text style={styles.status}>Status: {status}</Text>
+        </View>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    padding: 20,
+    backgroundColor: "#f5f5f5",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,   borderColor: "#ccc",
+    padding: 10, borderRadius: 5,  marginBottom: 15,
+  },
+  resultContainer: {
+    marginTop: 20,   alignItems: "center",
+  },
+  result: {
+    fontSize: 20,   fontWeight: "bold",
+  },
+  status: {
+    fontSize: 18, color: "#555",
+  },
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :9    		EXPENSE MANAGER APP USING FLUTTER
+Main.dart
+import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
+import 'ExpenseModel.dart';
+
+void main() {
+  runApp(MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Expense Manager',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: ExpenseManager(),
+    );
+  }
+}
+
+class ExpenseManager extends StatefulWidget {
+  @override
+  _ExpenseManagerState createState() => _ExpenseManagerState();
+}
+
+class _ExpenseManagerState extends State<ExpenseManager> {
+  final List<ExpenseModel> entries = [];
+  final TextEditingController amountController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+  DateTime selectedDate = DateTime.now();
+  bool isIncome = true;
+
+  void addEntry() {
+    if (amountController.text.isEmpty || categoryController.text.isEmpty) {
+      return;
+    }
+
+    setState(() {
+      entries.add(ExpenseModel(
+        amount: double.parse(amountController.text),
+        category: categoryController.text,
+        date: selectedDate,
+        isIncome: isIncome,
+      ));
+    });
+
+    amountController.clear();
+    categoryController.clear();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Expense Manager'),
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            // Input Form
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: amountController,
+                decoration: InputDecoration(labelText: 'Amount'),
+                keyboardType: TextInputType.number,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                controller: categoryController,
+                decoration: InputDecoration(labelText: 'Category'),
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('Income'),
+                Switch(
+                  value: isIncome,
+                  onChanged: (val) {
+                    setState(() {
+                      isIncome = val;
+                    });
+                  },
+                ),
+                Text('Expense'),
+              ],
+            ),
+            ElevatedButton(
+              onPressed: addEntry,
+              child: Text('Add Entry'),
+            ),
+
+            // Chart
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: AspectRatio(
+                aspectRatio: 1.0,
+                child: PieChart(
+                  PieChartData(
+                    sections: showingSections(),
+                  ),
+                ),
+              ),
+            ),
+
+            // Display Entries
+            ListView.builder(
+              shrinkWrap: true,
+              itemCount: entries.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(entries[index].category),
+                  subtitle: Text('${entries[index].amount} - ${entries[index].isIncome ? 'Income' : 'Expense'}'),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<PieChartSectionData> showingSections() {
+    double totalIncome = 0;
+    double totalExpense = 0;
+
+    Map<String, double> categoryTotal = {};
+
+    for (var entry in entries) {
+      if (entry.isIncome) {
+        totalIncome += entry.amount;
+      } else {
+        totalExpense += entry.amount;
+      }
+      if (categoryTotal.containsKey(entry.category)) {
+        categoryTotal[entry.category] = categoryTotal[entry.category]! + entry.amount;
+      } else {
+        categoryTotal[entry.category] = entry.amount;
+      }
+    }
+
+    return categoryTotal.entries.map((e) {
+      return PieChartSectionData(
+        color: Colors.blue,
+        value: e.value,
+        title: '${e.key}: ${e.value.toStringAsFixed(2)}',
+      );
+    }).toList();
+  }
+}
+
+ExpenseModel.dart
+class ExpenseModel {
+  int? id;
+  double amount;
+  String category;
+  DateTime date;
+  bool isIncome;  // true for income, false for expense
+
+  ExpenseModel({
+    this.id,
+    required this.amount,
+    required this.category,
+    required this.date,
+    required this.isIncome,
+  });
+
+  // Convert ExpenseModel to a map
+  Map<String, dynamic> toMap() {
+    return {
+      'amount': amount,
+      'category': category,
+      'date': date.toIso8601String(),
+      'isIncome': isIncome ? 1 : 0,
+    };
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :10        	  UNIT CONVERTER APP USING REACT
+
+import React, { useState } from "react";
+import { StyleSheet, Text, TextInput, View, Button, Alert,} from "react-native";
+import { Picker } from "@react-native-picker/picker";
+
+export default function App() {
+  const [inputValue, setInputValue] = useState("");
+  const [convertedValue, setConvertedValue] = useState(null);
+  const [unitType, setUnitType] = useState("kmToMiles");
+
+  const convertUnits = () => {
+    if (!inputValue || isNaN(inputValue)) {
+      Alert.alert("Invalid Input", "Please enter a valid number.");
+      return;
+    }
+
+    const value = parseFloat(inputValue);
+    let result;
+
+    switch (unitType) {
+      case "kmToMiles":
+        result = value * 0.621371;
+        break;
+      case "milesToKm":
+        result = value / 0.621371;
+        break;
+      case "kgToPounds":
+        result = value * 2.20462;
+        break;
+      case "poundsToKg":
+        result = value / 2.20462;
+        break;
+      default:
+        result = "Invalid conversion";
+    }
+
+    setConvertedValue(result.toFixed(2));
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>Unit Converter</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Enter value"
+        keyboardType="numeric"
+        value={inputValue}
+        onChangeText={setInputValue}
+      />
+      <Picker
+        selectedValue={unitType}
+        onValueChange={(itemValue) => setUnitType(itemValue)}
+        style={styles.picker}
+      >
+        <Picker.Item label="Kilometers to Miles" value="kmToMiles" />
+        <Picker.Item label="Miles to Kilometers" value="milesToKm" />
+        <Picker.Item label="Kilograms to Pounds" value="kgToPounds" />
+        <Picker.Item label="Pounds to Kilograms" value="poundsToKg" />
+      </Picker>
+      <Button title="Convert" onPress={convertUnits} />
+      {convertedValue && (
+        <Text style={styles.result}>
+          Converted Value: {convertedValue}
+        </Text>
+      )}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 20,
+    backgroundColor: "#f5f5f5",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginBottom: 20,
+  },
+  input: {
+    width: "80%",
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    marginBottom: 20,
+    borderRadius: 5,
+  },
+  picker: {
+    width: "80%",
+    marginBottom: 20,
+  },
+  result: {
+    fontSize: 20,
+    marginTop: 20,
+    color: "#555",
+  },
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ex No :11 		        TO - DO LIST USING REACT 
+import React, { useState } from "react";
+import {
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  Button,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+
+export default function App() {
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = () => {
+    if (task.trim() === "") {
+      alert("Task cannot be empty!");
+      return;
+    }
+    setTasks([...tasks, { id: Date.now().toString(), value: task }]);
+    setTask("");
+  };
+
+  const deleteTask = (taskId) => {
+    setTasks(tasks.filter((task) => task.id !== taskId));
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.title}>To-Do List</Text>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          placeholder="Add a new task"
+          value={task}
+          onChangeText={setTask}
+        />
+        <Button title="Add" onPress={addTask} />
+      </View>
+      <FlatList
+        data={tasks}
+        keyExtractor={(item) => item.id}
+        renderItem={({ item }) => (
+          <View style={styles.taskItem}>
+            <Text style={styles.taskText}>{item.value}</Text>
+            <TouchableOpacity onPress={() => deleteTask(item.id)}>
+              <Text style={styles.deleteButton}>Delete</Text>
+            </TouchableOpacity>
+          </View>
+        )}
+      />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "#f5f5f5",
+  },
+  title: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    marginBottom: 20,
+  },
+  inputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+  input: {
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    padding: 10,
+    marginRight: 10,
+    borderRadius: 5,
+  },
+  taskItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    padding: 15,
+    backgroundColor: "#fff",
+    borderRadius: 5,
+    marginBottom: 10,
+    elevation: 2,
+  },
+  taskText: {
+    fontSize: 16,
+  },
+  deleteButton: {
+    color: "red",
+    fontWeight: "bold",
+  },
+});
+
+
+
+
+
+
+
+
+
+
+1. Mail Notification (Android Studio)
+// MainActivity.java
+package com.example.mailnotification;
+
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText etTo, etSubject, etMessage;
+    Button btnSend;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        etTo = findViewById(R.id.etTo);
+        etSubject = findViewById(R.id.etSubject);
+        etMessage = findViewById(R.id.etMessage);
+        btnSend = findViewById(R.id.btnSend);
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String to = etTo.getText().toString();
+                String subject = etSubject.getText().toString();
+                String message = etMessage.getText().toString();
+
+                Intent email = new Intent(Intent.ACTION_SENDTO);
+                email.setData(Uri.parse("mailto:" + to));
+                email.putExtra(Intent.EXTRA_SUBJECT, subject);
+                email.putExtra(Intent.EXTRA_TEXT, message);
+
+                if (email.resolveActivity(getPackageManager()) != null) {
+                    startActivity(email);
+                }
+            }
+        });
+    }
+}
+
+<!-- res/layout/activity_main.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="To" />
+
+    <EditText
+        android:id="@+id/etSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Subject" />
+
+    <EditText
+        android:id="@+id/etMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Message"
+        android:lines="4" />
+
+    <Button
+        android:id="@+id/btnSend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Send Email" />
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+2. Online Quiz Backend Save (React Native)
+// App.js
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button, StyleSheet, Alert } from 'react-native';
+import firestore from '@react-native-firebase/firestore';
+
+export default function App() {
+  const [name, setName] = useState('');
+  const [score, setScore] = useState('');
+
+  const saveQuiz = async () => {
+    if (name && score) {
+      try {
+        await firestore().collection('Quizzes').add({
+          name: name,
+          score: score,
+          timestamp: firestore.FieldValue.serverTimestamp(),
+        });
+        Alert.alert('Success', 'Quiz data saved successfully!');
+        setName('');
+        setScore('');
+      } catch (error) {
+        Alert.alert('Error', 'Failed to save quiz data!');
+      }
+    } else {
+      Alert.alert('Validation Error', 'Please fill all fields!');
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <Text style={styles.header}>Online Quiz</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Name"
+        value={name}
+        onChangeText={setName}
+      />
+      <TextInput
+        style={styles.input}
+        placeholder="Score"
+        value={score}
+        keyboardType="numeric"
+        onChangeText={setScore}
+      />
+      <Button title="Save Quiz" onPress={saveQuiz} />
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: '#ccc',
+    padding: 10,
+    marginBottom: 15,
+    borderRadius: 5,
+  },
+});
+
+
+
+
+
+
+
+
+
+
+
+
+3. Library Management (Android Studio)
+// MainActivity.java
+package com.example.librarymanagement;
+
+import android.os.Bundle;
+import android.view.View;
+import android.widget.*;
+import androidx.appcompat.app.AppCompatActivity;
+import java.util.ArrayList;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText etBookName;
+    Button btnAdd, btnSearch, btnReturn;
+    ListView listView;
+    ArrayList<String> books = new ArrayList<>();
+    ArrayAdapter<String> adapter;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        etBookName = findViewById(R.id.etBookName);
+        btnAdd = findViewById(R.id.btnAdd);
+        btnSearch = findViewById(R.id.btnSearch);
+        btnReturn = findViewById(R.id.btnReturn);
+        listView = findViewById(R.id.listView);
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, books);
+        listView.setAdapter(adapter);
+
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String book = etBookName.getText().toString();
+                if (!book.isEmpty()) {
+                    books.add(book);
+                    adapter.notifyDataSetChanged();
+                    etBookName.setText("");
+                    Toast.makeText(MainActivity.this, "Book Added", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        btnSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String book = etBookName.getText().toString();
+                if (books.contains(book)) {
+                    Toast.makeText(MainActivity.this, "Book Found", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Book Not Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        btnReturn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String book = etBookName.getText().toString();
+                if (books.remove(book)) {
+                    adapter.notifyDataSetChanged();
+                    Toast.makeText(MainActivity.this, "Book Returned", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "Book Not Found", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+    }
+}
+
+
+<!-- res/layout/activity_main.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etBookName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Book Name" />
+
+    <Button
+        android:id="@+id/btnAdd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Add Book" />
+
+    <Button
+        android:id="@+id/btnSearch"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Search Book" />
+
+    <Button
+        android:id="@+id/btnReturn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Return Book" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+4. Database Connection (Cordova)
+cordova plugin add cordova-sqlite-storage
+document.addEventListener('deviceready', function () {
+    const db = window.sqlitePlugin.openDatabase({ name: 'my.db', location: 'default' });
+
+    // Create table
+    db.transaction(function (txn) {
+        txn.executeSql('CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY, name TEXT)', [], function () {
+            console.log("Table created successfully");
+        }, function (error) {
+            console.log("Error creating table: " + error.message);
+        });
+    });
+
+    // Insert data
+    document.getElementById('saveButton').addEventListener('click', function () {
+        const name = document.getElementById('nameInput').value;
+        db.transaction(function (txn) {
+            txn.executeSql('INSERT INTO users (name) VALUES (?)', [name], function () {
+                console.log("Data inserted successfully");
+            }, function (error) {
+                console.log("Error inserting data: " + error.message);
+            });
+        });
+    });
+
+    // Fetch data
+    document.getElementById('fetchButton').addEventListener('click', function () {
+        db.transaction(function (txn) {
+            txn.executeSql('SELECT * FROM users', [], function (tx, results) {
+                for (let i = 0; i < results.rows.length; i++) {
+                    console.log("User: " + results.rows.item(i).name);
+                }
+            }, function (error) {
+                console.log("Error fetching data: " + error.message);
+            });
+        });
+    });
+});
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Database Connection</title>
+</head>
+<body>
+    <h1>Cordova SQLite Example</h1>
+    <input id="nameInput" type="text" placeholder="Enter name">
+    <button id="saveButton">Save</button>
+    <button id="fetchButton">Fetch</button>
+    <script src="cordova.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+5. Android Studio Notification
+// MainActivity.java
+package com.example.notificationexample;
+
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.os.Build;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+
+public class MainActivity extends AppCompatActivity {
+
+    EditText etInput;
+    Button btnNotify;
+    final String CHANNEL_ID = "notification_channel";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        etInput = findViewById(R.id.etInput);
+        btnNotify = findViewById(R.id.btnNotify);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, "Notifications", NotificationManager.IMPORTANCE_DEFAULT);
+            NotificationManager manager = getSystemService(NotificationManager.class);
+            manager.createNotificationChannel(channel);
+        }
+
+        btnNotify.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String message = etInput.getText().toString();
+                NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity.this, CHANNEL_ID)
+                        .setContentTitle("Notification")
+                        .setContentText(message)
+                        .setSmallIcon(android.R.drawable.ic_dialog_info)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+                NotificationManager manager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                manager.notify(1, builder.build());
+            }
+        });
+    }
+}
+
+<!-- res/layout/activity_main.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Notification Message" />
+
+    <Button
+        android:id="@+id/btnNotify"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Show Notification" />
+</LinearLayout>
+
